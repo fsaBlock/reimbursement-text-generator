@@ -1,8 +1,10 @@
 import {
   calculateFare,
+  fareGeneratedAt,
   getStationById,
   getStations,
   lineLabel,
+  refreshFares,
   type RailSystem,
 } from '../lib/fare'
 import type { Station } from '../lib/fare/types'
@@ -60,7 +62,9 @@ function StationSelect({
 
 export function RailModule({ company }: Props) {
   const [system, setSystem] = useState<RailSystem>('bts')
-  const stations = useMemo(() => getStations(system), [system])
+  const [fareVersion, setFareVersion] = useState(0)
+  const [fareStatus, setFareStatus] = useState('ตารางที่มากับเว็บ')
+  const stations = useMemo(() => getStations(system), [system, fareVersion])
 
   const [fromOut, setFromOut] = useState('')
   const [toOut, setToOut] = useState('')
@@ -69,7 +73,6 @@ export function RailModule({ company }: Props) {
 
   const [manualOut, setManualOut] = useState('')
   const [manualBack, setManualBack] = useState('')
-
   const [output, setOutput] = useState('')
   const [error, setError] = useState('')
   const [fareHint, setFareHint] = useState('')
@@ -77,12 +80,27 @@ export function RailModule({ company }: Props) {
   const fareOutResult = useMemo(() => {
     if (!fromOut || !toOut) return null
     return calculateFare(system, fromOut, toOut)
-  }, [system, fromOut, toOut])
+  }, [system, fromOut, toOut, fareVersion])
 
   const fareBackResult = useMemo(() => {
     if (!fromBack || !toBack) return null
     return calculateFare(system, fromBack, toBack)
-  }, [system, fromBack, toBack])
+  }, [system, fromBack, toBack, fareVersion])
+
+  useEffect(() => {
+    let cancelled = false
+    refreshFares().then((result) => {
+      if (cancelled) return
+      setFareVersion((version) => version + 1)
+      if (result === 'live') {
+        const date = fareGeneratedAt()
+        setFareStatus(date ? `ราคาอัปเดตอัตโนมัติจากกรมการขนส่งทางราง (${date})` : 'ราคาอัปเดตอัตโนมัติจากกรมการขนส่งทางราง')
+      }
+    })
+    return () => {
+      cancelled = true
+    }
+  }, [])
 
   useEffect(() => {
     setFromOut('')
@@ -175,7 +193,7 @@ export function RailModule({ company }: Props) {
       <div className="card">
         <h2 className="mb-1 text-lg font-semibold text-white">เบิกค่าเดินทางรถไฟฟ้า</h2>
         <p className="mb-5 text-sm text-zinc-500">
-          ราคาจากตารางกรมการขนส่งทางราง รวมข้ามสายสุขุมวิท–สีลมได้ ถ้าไม่มีในตารางให้กรอกเอง
+          {fareStatus} รวมข้ามสายสุขุมวิท–สีลมได้ ถ้าไม่มีในตารางให้กรอกเอง
         </p>
 
         <div className="mb-5 inline-flex rounded-xl border border-line bg-ink/60 p-1">

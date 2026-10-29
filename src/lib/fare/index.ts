@@ -3,15 +3,36 @@ import type { FareResult, Station } from './types'
 
 export type RailSystem = 'bts' | 'mrt'
 
-type Network = {
+export type RailNetwork = {
   sourceName: string
+  generatedAt?: string
+  live?: boolean
   stations: Station[]
   fares: Record<string, number>
 }
 
-const network = railNetwork as Network
+let network = railNetwork as RailNetwork
 
-export const fareSourceName = network.sourceName
+export function fareSourceName() {
+  return network.sourceName
+}
+
+export function fareGeneratedAt() {
+  return network.generatedAt
+}
+
+export async function refreshFares(): Promise<'live' | 'bundled'> {
+  try {
+    const response = await fetch('/api/fares')
+    if (!response.ok) return 'bundled'
+    const data = (await response.json()) as RailNetwork
+    if (!Array.isArray(data.stations) || !data.fares) return 'bundled'
+    network = data
+    return data.live ? 'live' : 'bundled'
+  } catch {
+    return 'bundled'
+  }
+}
 
 export function getStations(system: RailSystem): Station[] {
   return network.stations
