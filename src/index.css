@@ -1,0 +1,42 @@
+@import 'tailwindcss';
+
+@theme {
+  --font-sans: 'IBM Plex Sans Thai', ui-sans-serif, system-ui, sans-serif;
+  --color-ink: #090b10;
+  --color-panel: #141922;
+  --color-panel-2: #1c2330;
+  --color-line: #2c3548;
+  --color-accent: #3ee0b0;
+  --color-accent-ink: #04281f;
+}
+
+html {
+  color-scheme: dark;
+}
+
+body {
+  @apply min-h-screen bg-ink text-zinc-100 antialiased;
+  background-image:
+    radial-gradient(900px 420px at 10% -10%, rgba(62, 224, 176, 0.14), transparent 55%),
+    radial-gradient(700px 380px at 100% 0%, rgba(96, 165, 250, 0.12), transparent 50%);
+}
+
+.card {
+  @apply rounded-2xl border border-line bg-panel/90 p-5 shadow-[0_20px_50px_-30px_rgba(0,0,0,0.8)] backdrop-blur;
+}
+
+.label {
+  @apply mb-1.5 block text-sm font-medium text-zinc-300;
+}
+
+.field {
+  @apply w-full rounded-xl border border-line bg-ink/70 px-3.5 py-2.5 text-base text-zinc-50 outline-none transition placeholder:text-zinc-500 focus:border-accent focus:ring-2 focus:ring-accent/25;
+}
+
+.btn {
+  @apply inline-flex items-center justify-center rounded-xl bg-accent px-4 py-2.5 text-sm font-semibold text-accent-ink transition hover:brightness-110 active:scale-[0.98];
+}
+
+.btn-ghost {
+  @apply inline-flex items-center justify-center rounded-xl border border-line bg-panel-2 px-4 py-2.5 text-sm font-medium text-zinc-200 transition hover:border-zinc-500;
+}
