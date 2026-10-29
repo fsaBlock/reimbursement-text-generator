@@ -1,7 +1,7 @@
 import { useState, type ReactNode } from 'react'
 import { getTheme, toggleTheme, type Theme } from '../lib/theme'
 
-type TabId = 'car' | 'toll' | 'rail'
+type TabId = 'car' | 'toll' | 'rail' | 'images'
 
 type Props = {
   activeTab: TabId
@@ -14,6 +14,7 @@ const tabs: { id: TabId; label: string; hint: string }[] = [
   { id: 'car', label: 'รถส่วนตัว', hint: 'กม. × เรทบริษัท' },
   { id: 'toll', label: 'ทางด่วน', hint: 'ไป-กลับรวม' },
   { id: 'rail', label: 'รถไฟฟ้า', hint: 'BTS / MRT' },
+  { id: 'images', label: 'รูปเอกสาร', hint: 'PDF และกริด' },
 ]
 
 export function Layout({ activeTab, onTabChange, companyField, children }: Props) {
@@ -45,7 +46,7 @@ export function Layout({ activeTab, onTabChange, companyField, children }: Props
       <main className="mx-auto max-w-6xl px-4 py-6">
         <div className="mb-5">{companyField}</div>
 
-        <nav className="mb-5 grid grid-cols-3 gap-2" aria-label="โมดูล">
+        <nav className="mb-5 grid grid-cols-2 gap-2 sm:grid-cols-4" aria-label="โมดูล">
           {tabs.map((tab) => {
             const active = activeTab === tab.id
             return (
