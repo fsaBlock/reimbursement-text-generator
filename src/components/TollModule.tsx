@@ -29,8 +29,8 @@ export function TollModule({ company }: Props) {
   return (
     <div className="grid items-start gap-4 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)]">
       <div className="card">
-        <h2 className="mb-1 text-lg font-semibold text-white">เบิกค่าทางด่วน</h2>
-        <p className="mb-5 text-sm text-zinc-500">ใส่ยอดไป-กลับรวมตามใบเสร็จ</p>
+        <h2 className="mb-1 text-lg font-semibold text-fg">เบิกค่าทางด่วน</h2>
+        <p className="mb-5 text-sm text-faint">ใส่ยอดไป-กลับรวมตามใบเสร็จ</p>
         <div className="max-w-sm">
           <label className="label">ค่าทางด่วนไป-กลับรวม (บาท)</label>
           <input
@@ -42,7 +42,7 @@ export function TollModule({ company }: Props) {
             className="field"
           />
         </div>
-        {error && <p className="mt-3 text-sm text-rose-300">{error}</p>}
+        {error && <p className="mt-3 text-sm text-danger">{error}</p>}
         <button type="button" onClick={handleGenerate} className="btn mt-5">
           สร้างข้อความ
         </button>

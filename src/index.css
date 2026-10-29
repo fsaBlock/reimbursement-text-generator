@@ -1,36 +1,77 @@
 @import 'tailwindcss';
 
-@theme {
+@theme inline {
   --font-sans: 'IBM Plex Sans Thai', ui-sans-serif, system-ui, sans-serif;
-  --color-ink: #090b10;
-  --color-panel: #141922;
-  --color-panel-2: #1c2330;
-  --color-line: #2c3548;
-  --color-accent: #3ee0b0;
-  --color-accent-ink: #04281f;
+  --color-ink: var(--ink);
+  --color-panel: var(--panel);
+  --color-panel-2: var(--panel-2);
+  --color-line: var(--line);
+  --color-fg: var(--fg);
+  --color-muted: var(--muted);
+  --color-faint: var(--faint);
+  --color-accent: var(--accent);
+  --color-accent-ink: var(--accent-ink);
+  --color-danger: var(--danger);
+  --color-warn: var(--warn);
 }
 
 html {
+  --ink: #090b10;
+  --panel: #141922;
+  --panel-2: #1c2330;
+  --line: #2c3548;
+  --fg: #f4f7fb;
+  --muted: #a1a1aa;
+  --faint: #71717a;
+  --accent: #3ee0b0;
+  --accent-ink: #04281f;
+  --danger: #fda4af;
+  --warn: #fde68a;
   color-scheme: dark;
 }
 
+html[data-theme='light'] {
+  --ink: #f3f6fa;
+  --panel: #ffffff;
+  --panel-2: #f4f8f6;
+  --line: #d5dee8;
+  --fg: #101828;
+  --muted: #475569;
+  --faint: #64748b;
+  --accent: #0c8f6e;
+  --accent-ink: #ffffff;
+  --danger: #be123c;
+  --warn: #b45309;
+  color-scheme: light;
+}
+
 body {
-  @apply min-h-screen bg-ink text-zinc-100 antialiased;
+  @apply min-h-screen bg-ink text-fg antialiased;
   background-image:
-    radial-gradient(900px 420px at 10% -10%, rgba(62, 224, 176, 0.14), transparent 55%),
-    radial-gradient(700px 380px at 100% 0%, rgba(96, 165, 250, 0.12), transparent 50%);
+    radial-gradient(900px 420px at 10% -10%, var(--glow-a), transparent 55%),
+    radial-gradient(700px 380px at 100% 0%, var(--glow-b), transparent 50%);
+}
+
+html {
+  --glow-a: rgba(62, 224, 176, 0.14);
+  --glow-b: rgba(96, 165, 250, 0.12);
+}
+
+html[data-theme='light'] {
+  --glow-a: rgba(12, 143, 110, 0.12);
+  --glow-b: rgba(59, 130, 246, 0.1);
 }
 
 .card {
-  @apply rounded-2xl border border-line bg-panel/90 p-5 shadow-[0_20px_50px_-30px_rgba(0,0,0,0.8)] backdrop-blur;
+  @apply rounded-2xl border border-line bg-panel/90 p-5 shadow-[0_20px_50px_-30px_rgba(0,0,0,0.45)] backdrop-blur;
 }
 
 .label {
-  @apply mb-1.5 block text-sm font-medium text-zinc-300;
+  @apply mb-1.5 block text-sm font-medium text-muted;
 }
 
 .field {
-  @apply w-full rounded-xl border border-line bg-ink/70 px-3.5 py-2.5 text-base text-zinc-50 outline-none transition placeholder:text-zinc-500 focus:border-accent focus:ring-2 focus:ring-accent/25;
+  @apply w-full rounded-xl border border-line bg-ink/70 px-3.5 py-2.5 text-base text-fg outline-none transition placeholder:text-faint focus:border-accent focus:ring-2 focus:ring-accent/25;
 }
 
 .btn {
@@ -38,5 +79,5 @@ body {
 }
 
 .btn-ghost {
-  @apply inline-flex items-center justify-center rounded-xl border border-line bg-panel-2 px-4 py-2.5 text-sm font-medium text-zinc-200 transition hover:border-zinc-500;
+  @apply inline-flex items-center justify-center rounded-xl border border-line bg-panel-2 px-4 py-2.5 text-sm font-medium text-fg transition hover:border-accent;
 }

@@ -8,7 +8,7 @@ export function CompanyField({ value, onChange }: Props) {
     <div className="card">
       <label className="label" htmlFor="company">
         ชื่อบริษัท
-        <span className="ml-2 font-normal text-zinc-500">ใช้ร่วมทุกโมดูล</span>
+        <span className="ml-2 font-normal text-faint">ใช้ร่วมทุกโมดูล</span>
       </label>
       <input
         id="company"

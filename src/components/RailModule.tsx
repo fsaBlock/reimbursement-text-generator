@@ -191,8 +191,8 @@ export function RailModule({ company }: Props) {
   return (
     <div className="grid items-start gap-4 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)]">
       <div className="card">
-        <h2 className="mb-1 text-lg font-semibold text-white">เบิกค่าเดินทางรถไฟฟ้า</h2>
-        <p className="mb-5 text-sm text-zinc-500">
+        <h2 className="mb-1 text-lg font-semibold text-fg">เบิกค่าเดินทางรถไฟฟ้า</h2>
+        <p className="mb-5 text-sm text-faint">
           {fareStatus} รวมข้ามสายสุขุมวิท–สีลมได้ ถ้าไม่มีในตารางให้กรอกเอง
         </p>
 
@@ -203,7 +203,7 @@ export function RailModule({ company }: Props) {
               type="button"
               onClick={() => setSystem(s)}
               className={`rounded-lg px-4 py-2 text-sm font-semibold transition ${
-                system === s ? 'bg-accent text-accent-ink' : 'text-zinc-400 hover:text-white'
+                system === s ? 'bg-accent text-accent-ink' : 'text-muted hover:text-fg'
               }`}
             >
               {s === 'bts' ? 'BTS' : 'MRT'}
@@ -238,13 +238,13 @@ export function RailModule({ company }: Props) {
             )}
             {needManualOut && (
               <div className="mt-3 max-w-xs">
-                <label className="label text-amber-200">ราคาขาไป (บาท) — กรอกเอง</label>
+                <label className="label text-warn">ราคาขาไป (บาท) — กรอกเอง</label>
                 <input
                   type="number"
                   min={0}
                   value={manualOut}
                   onChange={(e) => setManualOut(e.target.value)}
-                  className="field border-amber-400/40"
+                  className="field border-warn/50"
                 />
               </div>
             )}
@@ -276,21 +276,21 @@ export function RailModule({ company }: Props) {
             )}
             {needManualBack && (
               <div className="mt-3 max-w-xs">
-                <label className="label text-amber-200">ราคาขากลับ (บาท) — กรอกเอง</label>
+                <label className="label text-warn">ราคาขากลับ (บาท) — กรอกเอง</label>
                 <input
                   type="number"
                   min={0}
                   value={manualBack}
                   onChange={(e) => setManualBack(e.target.value)}
-                  className="field border-amber-400/40"
+                  className="field border-warn/50"
                 />
               </div>
             )}
           </div>
         </div>
 
-        {fareHint && <p className="mt-4 text-sm text-amber-200">{fareHint}</p>}
-        {error && <p className="mt-3 text-sm text-rose-300">{error}</p>}
+        {fareHint && <p className="mt-4 text-sm text-warn">{fareHint}</p>}
+        {error && <p className="mt-3 text-sm text-danger">{error}</p>}
         <button type="button" onClick={handleGenerate} className="btn mt-5">
           สร้างข้อความ
         </button>

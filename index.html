@@ -11,6 +11,14 @@
       rel="stylesheet"
     />
     <title>สร้างคำเบิกเงินทดรอบ</title>
+    <script>
+      try {
+        var theme = localStorage.getItem('theme')
+        document.documentElement.dataset.theme = theme === 'light' ? 'light' : 'dark'
+      } catch (e) {
+        document.documentElement.dataset.theme = 'dark'
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>

@@ -58,8 +58,8 @@ export function PrivateCarModule({ company }: Props) {
   return (
     <div className="grid items-start gap-4 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)]">
       <div className="card">
-        <h2 className="mb-1 text-lg font-semibold text-white">เบิกค่าเดินทางรถส่วนตัว</h2>
-        <p className="mb-5 text-sm text-zinc-500">คำนวณขาไป ขากลับ และยอดรวมตามเรทบริษัท</p>
+        <h2 className="mb-1 text-lg font-semibold text-fg">เบิกค่าเดินทางรถส่วนตัว</h2>
+        <p className="mb-5 text-sm text-faint">คำนวณขาไป ขากลับ และยอดรวมตามเรทบริษัท</p>
         <div className="grid gap-4 sm:grid-cols-2">
           <div>
             <label className="label">ระยะทางขาไป (กม.)</label>
@@ -98,20 +98,20 @@ export function PrivateCarModule({ company }: Props) {
         {preview && (
           <dl className="mt-5 grid grid-cols-3 gap-2 rounded-xl bg-ink/50 p-3 text-center">
             <div>
-              <dt className="text-xs text-zinc-500">ขาไป</dt>
-              <dd className="mt-1 text-sm font-semibold text-white">{formatMoney(preview.out)}</dd>
+              <dt className="text-xs text-faint">ขาไป</dt>
+              <dd className="mt-1 text-sm font-semibold text-fg">{formatMoney(preview.out)}</dd>
             </div>
             <div>
-              <dt className="text-xs text-zinc-500">ขากลับ</dt>
-              <dd className="mt-1 text-sm font-semibold text-white">{formatMoney(preview.back)}</dd>
+              <dt className="text-xs text-faint">ขากลับ</dt>
+              <dd className="mt-1 text-sm font-semibold text-fg">{formatMoney(preview.back)}</dd>
             </div>
             <div>
-              <dt className="text-xs text-zinc-500">รวม</dt>
+              <dt className="text-xs text-faint">รวม</dt>
               <dd className="mt-1 text-sm font-semibold text-accent">{formatMoney(preview.total)}</dd>
             </div>
           </dl>
         )}
-        {error && <p className="mt-3 text-sm text-rose-300">{error}</p>}
+        {error && <p className="mt-3 text-sm text-danger">{error}</p>}
         <button type="button" onClick={handleGenerate} className="btn mt-5">
           สร้างข้อความ
         </button>
